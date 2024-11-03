@@ -1,0 +1,20 @@
+.home_cates {
+  width: 200px;
+  height: 100vh;
+}
+
+.cates_dirs {
+  margin-bottom: 30px;
+}
+
+.dirs_head {
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.dirs_list {
+  
+}

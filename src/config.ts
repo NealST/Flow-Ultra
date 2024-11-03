@@ -9,18 +9,21 @@ const Subscribe = lazy(() => import('./pages/subscribe'));
 export const sceneList = [
   {
     icon: '',
+    id: 'home',
     label: '写作',
     path: '/',
     Component: Home
   },
   {
     icon: '',
+    id: 'subscribe',
     label: '订阅',
     path: '/subscribe',
     Component: Subscribe,
   },
   {
     icon: '',
+    id: 'innovation',
     label: '创意',
     path: '/innovation',
     Component: Innovation,
