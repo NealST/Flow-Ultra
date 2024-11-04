@@ -1,6 +1,6 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-import Layout from "./layout";
+import Layout from "./Layout";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 

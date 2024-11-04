@@ -1,5 +1,5 @@
 // 首页
-import HomeCates from '../../components/home-cates';
+import HomeCates from '@/components/biz/home-cates';
 import styles from './index.module.css';
 
 const Home = function() {
