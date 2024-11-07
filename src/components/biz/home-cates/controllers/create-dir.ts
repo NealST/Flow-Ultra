@@ -1,11 +1,12 @@
 // create dir for notes
 
-import { mkdir, BaseDirectory } from '@tauri-apps/plugin-fs';
+import { mkdir } from '@tauri-apps/plugin-fs';
+import getAppPath from '@/utils/get-app-path';
 
 const createDir = async function(dirName: string) {
-  const ret = await mkdir(`notes/${dirName}`, {
-    baseDir: BaseDirectory.AppLocalData
-  });
+  const appPath = await getAppPath();
+  console.log('appPath', appPath);
+  const ret = await mkdir(`${appPath}/notes`);
   return ret;
 }
 
