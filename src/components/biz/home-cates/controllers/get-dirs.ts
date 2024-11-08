@@ -1,12 +1,16 @@
 // get dirs list in notes
 
-import { readDir, BaseDirectory } from "@tauri-apps/plugin-fs";
+import { readDir } from "@tauri-apps/plugin-fs";
+import getAppPath from "@/utils/get-app-path";
+import { NOTES_PATH } from '@/constants';
+import ensureDir from '@/utils/ensure-dir';
 
 const getDirList = async function () {
   try {
-    const entries = await readDir("notes", {
-      baseDir: BaseDirectory.AppLocalData,
-    });
+    const appPath = await getAppPath();
+    const notesPath = `${appPath}/${NOTES_PATH}`;
+    await ensureDir(notesPath);
+    const entries = await readDir(notesPath);
     return entries;
   } catch (e) {
     return [];

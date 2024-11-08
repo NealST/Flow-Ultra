@@ -9,7 +9,6 @@ import styles from "./index.module.css";
 const HomeCates = function () {
 
   const [dirList, setDirList] = useState([] as IDirItem[]);
-  const newDirNameRef = useRef('');
 
   useEffect(() => {
     getDirList().then(ret => {
@@ -31,7 +30,18 @@ const HomeCates = function () {
       setDirList(newDirList);
       return
     }
-    createDir(newName);
+    createDir(newName).then(() => {
+      // create dir successfully
+      newDirList[0] = {
+        type: 'dir',
+        name: newName,
+      };
+      setDirList(newDirList);
+    }).catch(() => {
+      // create dir with exception
+      newDirList.shift();
+      setDirList(newDirList);
+    });
   }
 
   function onRemoveDir() {}
