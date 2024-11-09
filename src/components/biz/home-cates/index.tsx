@@ -3,22 +3,26 @@ import { MdOutlineCreateNewFolder } from "react-icons/md";
 import getDirList from './controllers/get-dirs';
 import createDir from './controllers/create-dir';
 import DirList from '../dir-list';
+import useSelectedDirStore, { IState } from './controllers/use-dir-store';
 import { IDirItem } from '../dir-list/types';
 import styles from "./index.module.css";
 
 const HomeCates = function () {
 
   const [dirList, setDirList] = useState([] as IDirItem[]);
+  const setSelectedDir = useSelectedDirStore((state: IState) => state.setName);
 
   useEffect(() => {
     getDirList().then(ret => {
       console.log('get dir list ret', ret);
+      // select the first dir by default
     });
   }, []);
 
   function addDir() {
     const newDirList = [{
-      type: 'input'
+      type: 'input',
+      name: '',
     }].concat(dirList);
     setDirList(newDirList);
   }
@@ -60,6 +64,7 @@ const HomeCates = function () {
           onNewDirComplete={onNewDirComplete}
           onRemove={onRemoveDir}
           onRename={onRenameDir}
+          onSelectDir={(newName: string, index: number) => setSelectedDir(newName)}
         />
       </div>
       <div className={styles.cates_tags}>
