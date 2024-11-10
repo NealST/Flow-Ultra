@@ -1,0 +1,17 @@
+.dirs_list {
+  
+}
+
+.list_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item_icon {
+  margin-right: 4px;
+}
+
+.item_input {
+  color: #111;
+}

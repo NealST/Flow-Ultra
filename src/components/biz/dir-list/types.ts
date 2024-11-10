@@ -2,7 +2,6 @@
 
 export interface IDirItem {
   type: string;
-  path?: string;
   name: string;
 }
 

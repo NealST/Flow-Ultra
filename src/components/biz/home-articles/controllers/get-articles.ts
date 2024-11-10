@@ -4,6 +4,9 @@ import getAppPath from '@/utils/get-app-path';
 import { NOTES_PATH } from '@/constants';
 
 const getArticles = async function(selectedDir: string) {
+  if (!selectedDir) {
+    return [];
+  }
   const appPath = await getAppPath();
   const notesPath = await path.join(appPath, NOTES_PATH);
   const isNotesExists = await exists(notesPath);

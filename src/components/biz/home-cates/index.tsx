@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { MdOutlineCreateNewFolder } from "react-icons/md";
+import { useEffect, useState } from 'react';
+import { VscAdd } from "react-icons/vsc";
 import getDirList from './controllers/get-dirs';
 import createDir from './controllers/create-dir';
 import DirList from '../dir-list';
@@ -15,7 +15,15 @@ const HomeCates = function () {
   useEffect(() => {
     getDirList().then(ret => {
       console.log('get dir list ret', ret);
+      if (ret.length === 0) {
+        return
+      }
+      setDirList(ret.map(item => ({
+        name: item.name,
+        type: 'dir'
+      })));
       // select the first dir by default
+      setSelectedDir(ret[0].name);
     });
   }, []);
 
@@ -57,7 +65,7 @@ const HomeCates = function () {
       <div className={styles.cates_dirs}>
         <div className={styles.dirs_head}>
           <span className={styles.head_title}>Notes:</span>
-          <MdOutlineCreateNewFolder onClick={addDir} />
+          <VscAdd onClick={addDir} />
         </div>
         <DirList
           dataSource={dirList}

@@ -1,13 +1,12 @@
-// 文件或文件夹列表展示与操作
-import { useRef, ChangeEvent } from "react";
-import { IList } from "./types";
-import { GoFileDirectory } from "react-icons/go";
-import Input from "@/components/ui/input";
-import styles from "./index.module.css";
+import { useRef, ChangeEvent } from 'react';
+import { GoFile } from "react-icons/go";
+import Input from '@/components/ui/input';
+import { IArticleList } from './types';
+import styles from './index.module.css';
 
-const DirList = function (props: IList) {
-  const { dataSource, onNewDirComplete, onRemove, onRename, onSelectDir } =
-    props;
+const ArticleList = function(props: IArticleList) {
+
+  const { dataSource, onNewArticleComplete, onRemove, onRename, onSelectArticle } = props;
   const inputNameRef = useRef("");
 
   function onNameChange(e: ChangeEvent<HTMLInputElement>) {
@@ -19,11 +18,11 @@ const DirList = function (props: IList) {
     if (type === "input") {
       return;
     }
-    onSelectDir(name, index);
+    onSelectArticle(name, index);
   }
 
   return (
-    <div className={styles.dirs_list}>
+    <div className={styles.article_list}>
       {dataSource.map((item, index) => {
         const { type, name } = item;
         return (
@@ -32,13 +31,13 @@ const DirList = function (props: IList) {
             key={name}
             onClick={() => onSelect(type, name, index)}
           >
-            <GoFileDirectory className={styles.item_icon} />
+            <GoFile className={styles.item_icon} />
             {type === "input" ? (
               <Input
                 className={styles.item_input}
                 autoFocus
                 onChange={onNameChange}
-                onBlur={() => onNewDirComplete(inputNameRef.current)}
+                onBlur={() => onNewArticleComplete(inputNameRef.current)}
               />
             ) : (
               <span className={styles.item_name}>{name}</span>
@@ -48,6 +47,6 @@ const DirList = function (props: IList) {
       })}
     </div>
   );
-};
+}
 
-export default DirList;
+export default ArticleList;
