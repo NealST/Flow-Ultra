@@ -1,37 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { VscAdd } from "react-icons/vsc";
-import getDirList from './controllers/get-dirs';
-import createDir from './controllers/create-dir';
-import DirList from '../dir-list';
-import useSelectedDirStore, { IState } from './controllers/use-dir-store';
-import { IDirItem } from '../dir-list/types';
+import getDirList from "./controllers/get-dirs";
+import createDir from "./controllers/create-dir";
+import DirList from "../dir-list";
+import useSelectedDirStore, { IState } from "./controllers/use-dir-store";
+import { IDirItem } from "../dir-list/types";
 import styles from "./index.module.css";
 
 const HomeCates = function () {
-
   const [dirList, setDirList] = useState([] as IDirItem[]);
-  const setSelectedDir = useSelectedDirStore((state: IState) => state.setName);
+  const { name: selectedDir, setName: setSelectedDir } = useSelectedDirStore(
+    (state: IState) => state
+  );
 
   useEffect(() => {
-    getDirList().then(ret => {
-      console.log('get dir list ret', ret);
+    getDirList().then((ret) => {
+      console.log("get dir list ret", ret);
       if (ret.length === 0) {
-        return
+        return;
       }
-      setDirList(ret.map(item => ({
-        name: item.name,
-        type: 'dir'
-      })));
+      setDirList(
+        ret.map((item) => ({
+          name: item.name,
+          type: "dir",
+        }))
+      );
       // select the first dir by default
       setSelectedDir(ret[0].name);
     });
   }, []);
 
   function addDir() {
-    const newDirList = [{
-      type: 'input',
-      name: '',
-    }].concat(dirList);
+    const newDirList = [
+      {
+        type: "input",
+        name: "",
+      },
+    ].concat(dirList);
     setDirList(newDirList);
   }
 
@@ -40,20 +45,24 @@ const HomeCates = function () {
     if (!newName) {
       newDirList.shift();
       setDirList(newDirList);
-      return
+      return;
     }
-    createDir(newName).then(() => {
-      // create dir successfully
-      newDirList[0] = {
-        type: 'dir',
-        name: newName,
-      };
-      setDirList(newDirList);
-    }).catch(() => {
-      // create dir with exception
-      newDirList.shift();
-      setDirList(newDirList);
-    });
+    createDir(newName)
+      .then(() => {
+        // create dir successfully
+        newDirList[0] = {
+          type: "dir",
+          name: newName,
+        };
+        setDirList(newDirList);
+        // select this new dir when create it successfully
+        setSelectedDir(newName);
+      })
+      .catch(() => {
+        // create dir with exception
+        newDirList.shift();
+        setDirList(newDirList);
+      });
   }
 
   function onRemoveDir() {}
@@ -72,7 +81,10 @@ const HomeCates = function () {
           onNewDirComplete={onNewDirComplete}
           onRemove={onRemoveDir}
           onRename={onRenameDir}
-          onSelectDir={(newName: string, index: number) => setSelectedDir(newName)}
+          onSelectDir={(newName: string, index: number) =>
+            setSelectedDir(newName)
+          }
+          selectedDir={selectedDir}
         />
       </div>
       <div className={styles.cates_tags}>

@@ -11,4 +11,5 @@ export interface IList {
   onRemove: (index: number) => void;
   onRename: (name: string, index: number) => void;
   onSelectDir: (name: string, index: number) => void;
+  selectedDir: string;
 }

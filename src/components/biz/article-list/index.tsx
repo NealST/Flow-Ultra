@@ -1,12 +1,19 @@
-import { useRef, ChangeEvent } from 'react';
+import { useRef, ChangeEvent } from "react";
 import { GoFile } from "react-icons/go";
-import Input from '@/components/ui/input';
-import { IArticleList } from './types';
-import styles from './index.module.css';
+import Input from "@/components/ui/input";
+import { IArticleList } from "./types";
+import cn from "classnames";
+import styles from "./index.module.css";
 
-const ArticleList = function(props: IArticleList) {
-
-  const { dataSource, onNewArticleComplete, onRemove, onRename, onSelectArticle } = props;
+const ArticleList = function (props: IArticleList) {
+  const {
+    dataSource,
+    selectedArticle,
+    onNewArticleComplete,
+    onRemove,
+    onRename,
+    onSelectArticle,
+  } = props;
   const inputNameRef = useRef("");
 
   function onNameChange(e: ChangeEvent<HTMLInputElement>) {
@@ -25,9 +32,13 @@ const ArticleList = function(props: IArticleList) {
     <div className={styles.article_list}>
       {dataSource.map((item, index) => {
         const { type, name } = item;
+        const isSelected = name === selectedArticle;
         return (
           <div
-            className={styles.list_item}
+            className={cn(
+              styles.list_item,
+              isSelected ? styles.list_item_selected : ""
+            )}
             key={name}
             onClick={() => onSelect(type, name, index)}
           >
@@ -47,6 +58,6 @@ const ArticleList = function(props: IArticleList) {
       })}
     </div>
   );
-}
+};
 
 export default ArticleList;

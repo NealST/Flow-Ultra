@@ -3,11 +3,18 @@ import { useRef, ChangeEvent } from "react";
 import { IList } from "./types";
 import { GoFileDirectory } from "react-icons/go";
 import Input from "@/components/ui/input";
+import cn from "classnames";
 import styles from "./index.module.css";
 
 const DirList = function (props: IList) {
-  const { dataSource, onNewDirComplete, onRemove, onRename, onSelectDir } =
-    props;
+  const {
+    dataSource,
+    selectedDir,
+    onNewDirComplete,
+    onRemove,
+    onRename,
+    onSelectDir,
+  } = props;
   const inputNameRef = useRef("");
 
   function onNameChange(e: ChangeEvent<HTMLInputElement>) {
@@ -26,9 +33,13 @@ const DirList = function (props: IList) {
     <div className={styles.dirs_list}>
       {dataSource.map((item, index) => {
         const { type, name } = item;
+        const isSelected = name === selectedDir;
         return (
           <div
-            className={styles.list_item}
+            className={cn(
+              styles.list_item,
+              isSelected ? styles.list_item_selected : ""
+            )}
             key={name}
             onClick={() => onSelect(type, name, index)}
           >
