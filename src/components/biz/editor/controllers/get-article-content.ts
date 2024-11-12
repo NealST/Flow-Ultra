@@ -3,7 +3,7 @@ import { exists } from "@tauri-apps/plugin-fs";
 import * as path from "@tauri-apps/api/path";
 import getAppPath from "@/utils/get-app-path";
 import { NOTES_PATH } from "@/constants";
-import { readTextFile, BaseDirectory } from "@tauri-apps/plugin-fs";
+import { readTextFile } from "@tauri-apps/plugin-fs";
 
 const getArticlePath = async function (
   selectedDir: string,
@@ -11,7 +11,7 @@ const getArticlePath = async function (
 ) {
   const appPath = await getAppPath();
   const dirPath = await path.join(appPath, NOTES_PATH, selectedDir);
-  const articlePath = await path.join(dirPath, selectedArticle);
+  const articlePath = await path.join(dirPath, `${selectedArticle}.md`);
   const isArticleExist = await exists(articlePath);
   if (!isArticleExist) {
     return "";
@@ -19,13 +19,19 @@ const getArticlePath = async function (
   return articlePath;
 };
 
-const getArticleContent = function (
+const getArticleContent = async function (
   selectedDir: string,
   selectedArticle: string
 ) {
   if (!selectedDir || !selectedArticle) {
     return "";
   }
+  const articlePath = await getArticlePath(selectedDir, selectedArticle);
+  if (!articlePath) {
+    return '';
+  }
+  const articleContent = await readTextFile(articlePath);
+  return articleContent;
 };
 
 export default getArticleContent;
