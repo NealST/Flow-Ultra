@@ -14,7 +14,7 @@ const Wysiwyg = function(props: IProps) {
   const editorRef: RefObject<HTMLDivElement> = useRef(null);
 
   return (
-    <div className={styles.wysiwyg} ref={editorRef}>
+    <div className={styles.wysiwyg} ref={editorRef} contentEditable>
       
     </div>
   )

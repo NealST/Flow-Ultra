@@ -17,7 +17,8 @@ const Editor = function() {
   
   return (
     <div className={styles.editor}>
-      
+      <div className={styles.editor_head}></div>
+      <div className={styles.editor_wysiwyg}></div>
     </div>
   )
 };
