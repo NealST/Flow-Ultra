@@ -1,0 +1,6 @@
+.editable {
+  flex: 1;
+  max-width: 890px;
+  padding-left: 30px;
+  padding-right: 30px;
+}

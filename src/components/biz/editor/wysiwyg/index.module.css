@@ -1,0 +1,10 @@
+.wysiwyg {
+  display: relative;
+  padding-top: 42px;
+}
+
+.wysiwyg_editor {
+  display: flex;
+  flex-direction: row;
+  padding-top: 35px;
+}

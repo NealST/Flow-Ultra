@@ -19,24 +19,20 @@ const Header = function(props: IProps) {
       <div className={styles.header_left}>
         <span className={styles.header_title}>{title}</span>
         <span className={styles.header_save_tip}>{saveTime}</span>
-        <span className={styles.header_count}>{charCount}</span>
+        <span className={styles.header_count}>字数:{charCount}</span>
       </div>
       <div className={styles.header_right}>
-        <div className={styles.action_show}>
+        <div className={styles.action_item}>
           <SlSocialYoutube />
-          <span className={styles.action_text}>演示模式</span>
         </div>
-        <div className={styles.action_dropin}>
+        <div className={styles.action_item}>
           <SlFrame />
-          <span className={styles.action_text}>沉浸模式</span>
         </div>
-        <div className={styles.action_dropin}>
+        <div className={styles.action_item}>
           <RxExit />
-          <span className={styles.action_text}>导出</span>
         </div>
-        <div className={styles.action_dropin}>
+        <div className={styles.action_item}>
           <IoTrashOutline />
-          <span className={styles.action_text}>删除</span>
         </div>
       </div>
     </div>

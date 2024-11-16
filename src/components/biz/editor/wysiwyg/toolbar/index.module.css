@@ -1,0 +1,36 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 52px;
+  height: 42px;
+  width: auto;
+  border: none;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+}
+
+.tools_insert {
+  margin-left: 8px;
+  min-width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.insert_icon {
+  font-size: 18px;
+  color: var(--theme-color);
+}
+
+.tools_divider {
+  margin-left: 8px;
+  color: #585a5a;
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 1px;
+  height: 24px;
+  background-color: #eff0f0;
+}

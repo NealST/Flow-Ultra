@@ -198,3 +198,8 @@ button {
     @apply bg-background text-foreground;
   }
 }
+
+:root {
+  --theme-color: #00b96b;
+  --theme-dander: #df2a3f;
+}

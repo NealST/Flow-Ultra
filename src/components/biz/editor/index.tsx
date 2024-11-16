@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import useSelectedDirStore, { IState } from '../home-cates/controllers/use-dir-store';
 import useSelectedArticleStore, { IArticleState } from '@/components/biz/home-articles/controllers/use-article-store';
 import getArticleContent from './controllers/get-article-content';
+import Header from './header';
+import Wysiwyg from './wysiwyg';
 import styles from './index.module.css';
 
 const Editor = function() {
@@ -14,11 +16,13 @@ const Editor = function() {
       content && setFileContent(content);
     });
   }, [selectedDir, selectedArticle]);
+
+  function onEditorChange(newContent: string) {}
   
   return (
     <div className={styles.editor}>
-      <div className={styles.editor_head}></div>
-      <div className={styles.editor_wysiwyg}></div>
+      <Header title={selectedArticle} saveTime='' charCount={20} />
+      <Wysiwyg initialContent={fileContent} onChange={onEditorChange} />
     </div>
   )
 };

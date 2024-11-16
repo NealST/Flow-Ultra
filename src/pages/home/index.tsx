@@ -1,6 +1,7 @@
 // 首页
 import Cates from '@/components/biz/home-cates';
 import Articles from '@/components/biz/home-articles';
+import Editor from '@/components/biz/editor';
 import styles from './index.module.css';
 
 const Home = function() {
@@ -8,7 +9,7 @@ const Home = function() {
     <div className={styles.home}>
       <Cates />
       <Articles />
-      <div className={styles.home_article_panel}></div>
+      <Editor />
     </div>
   )
 }
